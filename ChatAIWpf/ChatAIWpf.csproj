@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.8.2" />
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.5.0" />
     <PackageReference Include="Betalgo.OpenAI.GPT3" Version="6.8.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.26.0" />

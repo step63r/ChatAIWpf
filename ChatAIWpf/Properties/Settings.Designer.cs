@@ -25,37 +25,13 @@ namespace ChatAIWpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ca482c7ff03c4e64b4340fb6c826eca6")]
-        public string AzureSubscriptionKey {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://uchi-chataiwpf-kv.vault.azure.net/")]
+        public string AzureKeyVaultUri {
             get {
-                return ((string)(this["AzureSubscriptionKey"]));
+                return ((string)(this["AzureKeyVaultUri"]));
             }
             set {
-                this["AzureSubscriptionKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("eastus")]
-        public string AzureServiceRegion {
-            get {
-                return ((string)(this["AzureServiceRegion"]));
-            }
-            set {
-                this["AzureServiceRegion"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("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")]
-        public string OpenAIApiKey {
-            get {
-                return ((string)(this["OpenAIApiKey"]));
-            }
-            set {
-                this["OpenAIApiKey"] = value;
+                this["AzureKeyVaultUri"] = value;
             }
         }
     }

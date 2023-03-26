@@ -1,4 +1,5 @@
-﻿using ChatAIWpf.Models;
+﻿using Azure.Security.KeyVault.Secrets;
+using ChatAIWpf.Models;
 using ChatAIWpf.Services;
 using ChatAIWpf.Services.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,8 +12,10 @@ using OpenAI.GPT3.Managers;
 using OpenAI.GPT3.ObjectModels.RequestModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Identity;
 
 namespace ChatAIWpf.ViewModels
 {
@@ -72,6 +75,18 @@ namespace ChatAIWpf.ViewModels
         /// 
         /// </summary>
         private List<ChatMessage> _messages = new();
+        /// <summary>
+        /// 
+        /// </summary>
+        private SecretClient _secretClient;
+        /// <summary>
+        /// 
+        /// </summary>
+        private SpeechConfig _speechConfig;
+        /// <summary>
+        /// Azure Key VaultのキーコンテナーURI
+        /// </summary>
+        private readonly string _azureKeyVaultUri = Properties.Settings.Default.AzureKeyVaultUri;
         #endregion
 
         #region コンストラクタ
@@ -85,9 +100,18 @@ namespace ChatAIWpf.ViewModels
             AudioDevices = _audioService.GetActiveCapture();
             SelectedAudioDevice = AudioDevices.FirstOrDefault();
 
+            // Get secrets.
+            _secretClient = new SecretClient(new Uri(_azureKeyVaultUri), new DefaultAzureCredential());
+            var azureSpeechApiKey = _secretClient.GetSecretAsync("AzureSpeechAPIKey").Result;
+            var openAIApiKey = _secretClient.GetSecretAsync("OpenAIApiKey").Result;
+
+            // Create instances.
+            _speechConfig = SpeechConfig.FromSubscription(azureSpeechApiKey.Value.Value, "eastus");
+            _speechConfig.SpeechRecognitionLanguage = "ja-JP";
+
             _openAIService = new OpenAIService(new OpenAiOptions()
             {
-                ApiKey = Properties.Settings.Default.OpenAIApiKey,
+                ApiKey = openAIApiKey.Value.Value,
             });
 
             _messages.Add(ChatMessage.FromSystem("あなたは日本語で会話ができるチャットボットです。"));
@@ -102,14 +126,8 @@ namespace ChatAIWpf.ViewModels
         [RelayCommand(CanExecute = nameof(CanExecuteCaptureAudio))]
         private async Task CaptureAudio()
         {
-            var speechConfig = SpeechConfig.FromSubscription(
-                Properties.Settings.Default.AzureSubscriptionKey,
-                Properties.Settings.Default.AzureServiceRegion);
-            speechConfig.SpeechRecognitionLanguage = "ja-JP";
-
             var audioConfig = AudioConfig.FromMicrophoneInput(SelectedAudioDevice?.ID);
-
-            using (var recognizer = new SpeechRecognizer(speechConfig, audioConfig))
+            using (var recognizer = new SpeechRecognizer(_speechConfig, audioConfig))
             {
                 IsRecording = true;
                 var result = await recognizer.RecognizeOnceAsync();
@@ -175,6 +193,7 @@ namespace ChatAIWpf.ViewModels
 
         // TODO:
         //  - ChatGPTの返答をVoiceVoxに突っ込んで再生する
+        //  - 誰でもこのアプリからシークレットにアクセスできるようにする
         //  - ListViewにScrollToBottomBehaviorをつける
         //  - ソースをいい感じに切り分ける
         //  - UIをいい感じにする

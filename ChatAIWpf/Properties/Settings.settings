@@ -2,14 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ChatAIWpf.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="AzureSubscriptionKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ca482c7ff03c4e64b4340fb6c826eca6</Value>
-    </Setting>
-    <Setting Name="AzureServiceRegion" Type="System.String" Scope="User">
-      <Value Profile="(Default)">eastus</Value>
-    </Setting>
-    <Setting Name="OpenAIApiKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">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</Value>
+    <Setting Name="AzureKeyVaultUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://uchi-chataiwpf-kv.vault.azure.net/</Value>
     </Setting>
   </Settings>
 </SettingsFile>
