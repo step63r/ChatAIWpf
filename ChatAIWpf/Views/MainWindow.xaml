@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:ChatAIWpf.Views"
         xmlns:vm="clr-namespace:ChatAIWpf.ViewModels"
         mc:Ignorable="d"
@@ -10,11 +11,17 @@
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="8">
             <Grid.ColumnDefinitions>
@@ -29,6 +36,11 @@
         </Grid>
         <Grid Grid.Row="2" Margin="8">
             <ListView ItemsSource="{Binding Conversation, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+        <Grid Grid.Row="3">
+            <StatusBar>
+                <Label Content="{Binding StatusBarMessage}" />
+            </StatusBar>
         </Grid>
     </Grid>
 </Window>
