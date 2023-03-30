@@ -23,6 +23,11 @@ namespace ChatAIWpf.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            // configure azure environment variables.
+            Environment.SetEnvironmentVariable("AZURE_CLIENT_ID", Properties.Settings.Default.AzureClientID);
+            Environment.SetEnvironmentVariable("AZURE_TENANT_ID", Properties.Settings.Default.AzureTenantID);
+            Environment.SetEnvironmentVariable("AZURE_CLIENT_SECRET", Properties.Settings.Default.AzureClientSecret);
         }
     }
 }

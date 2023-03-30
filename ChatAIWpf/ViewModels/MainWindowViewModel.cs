@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Media;
 using System.Threading.Tasks;
-using System.Windows.Threading;
 
 namespace ChatAIWpf.ViewModels
 {
@@ -114,14 +113,14 @@ namespace ChatAIWpf.ViewModels
         private bool _isRecording = false;
 
         /// <summary>
-        /// 
+        /// 初期化済フラグ
         /// </summary>
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(CaptureAudioCommand))]
         private bool _isLoaded = false;
 
         /// <summary>
-        /// 
+        /// ステータスバーに表示するメッセージ
         /// </summary>
         [ObservableProperty]
         private string _statusBarMessage = string.Empty;
@@ -160,15 +159,15 @@ namespace ChatAIWpf.ViewModels
         /// </summary>
         private OpenAIService? _openAIService;
         /// <summary>
-        /// 
+        /// OpenAIに渡す会話履歴
         /// </summary>
         private List<ChatMessage> _messages = new();
         /// <summary>
-        /// 
+        /// Azure Key Vault シークレットインスタンス
         /// </summary>
         private SecretClient _secretClient;
         /// <summary>
-        /// 
+        /// Azure Cognitive Services スピーチインスタンス
         /// </summary>
         private SpeechConfig _speechConfig;
         /// <summary>
@@ -201,6 +200,7 @@ namespace ChatAIWpf.ViewModels
         [RelayCommand]
         private async Task Loaded()
         {
+            _logger.Info("start");
             await Task.Run(() =>
             {
                 StatusBarMessage = "OpenAIの初期化中...";
@@ -234,6 +234,7 @@ namespace ChatAIWpf.ViewModels
                 StatusBarMessage = "準備完了";
             });
             IsLoaded = true;
+            _logger.Info("end");
         }
 
         /// <summary>
@@ -333,7 +334,6 @@ namespace ChatAIWpf.ViewModels
         #endregion
 
         // TODO:
-        //  - 誰でもこのアプリからシークレットにアクセスできるようにする
         //  - ListViewにScrollToBottomBehaviorをつける
         //  - ソースをいい感じに切り分ける
         //  - UIをいい感じにする

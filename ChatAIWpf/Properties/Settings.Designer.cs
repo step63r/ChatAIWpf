@@ -34,5 +34,41 @@ namespace ChatAIWpf.Properties {
                 this["AzureKeyVaultUri"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5deaea0f-acc6-4c71-aa8b-ccf5f1f3a343")]
+        public string AzureClientID {
+            get {
+                return ((string)(this["AzureClientID"]));
+            }
+            set {
+                this["AzureClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("39ff9aae-e121-4388-83f4-b66586365fdd")]
+        public string AzureTenantID {
+            get {
+                return ((string)(this["AzureTenantID"]));
+            }
+            set {
+                this["AzureTenantID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("IoU8Q~P-KiAcFvaEY~08BI~rgyhg_mmyywp~rbIB")]
+        public string AzureClientSecret {
+            get {
+                return ((string)(this["AzureClientSecret"]));
+            }
+            set {
+                this["AzureClientSecret"] = value;
+            }
+        }
     }
 }

@@ -5,5 +5,14 @@
     <Setting Name="AzureKeyVaultUri" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://uchi-chataiwpf-kv.vault.azure.net/</Value>
     </Setting>
+    <Setting Name="AzureClientID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5deaea0f-acc6-4c71-aa8b-ccf5f1f3a343</Value>
+    </Setting>
+    <Setting Name="AzureTenantID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">39ff9aae-e121-4388-83f4-b66586365fdd</Value>
+    </Setting>
+    <Setting Name="AzureClientSecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IoU8Q~P-KiAcFvaEY~08BI~rgyhg_mmyywp~rbIB</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
